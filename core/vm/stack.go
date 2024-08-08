@@ -60,6 +60,77 @@ func (st *Stack) pop() (ret uint256.Int) {
 	return
 }
 
+func (st *Stack) pop2() (pop0, pop1 uint256.Int) {
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-2]
+	return
+}
+
+func (st *Stack) pop3() (pop0, pop1, pop2 uint256.Int) {
+	pop2 = st.data[len(st.data)-3]
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-3]
+	return
+}
+
+func (st *Stack) pop4() (pop0, pop1, pop2, pop3 uint256.Int) {
+	pop3 = st.data[len(st.data)-4]
+	pop2 = st.data[len(st.data)-3]
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-4]
+	return
+}
+
+func (st *Stack) popPeek() (pop uint256.Int, peek *uint256.Int) {
+	peek = &st.data[len(st.data)-2]
+	pop = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-1]
+	return
+}
+
+func (st *Stack) pop2Peek() (pop0, pop1 uint256.Int, peek *uint256.Int) {
+	peek = &st.data[len(st.data)-3]
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-2]
+	return
+}
+
+func (st *Stack) pop3Peek() (pop0, pop1, pop2 uint256.Int, peek *uint256.Int) {
+	peek = &st.data[len(st.data)-4]
+	pop2 = st.data[len(st.data)-3]
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-3]
+	return
+}
+
+func (st *Stack) pop5Peek() (pop0, pop1, pop2, pop3, pop4 uint256.Int, peek *uint256.Int) {
+	peek = &st.data[len(st.data)-6]
+	pop4 = st.data[len(st.data)-5]
+	pop3 = st.data[len(st.data)-4]
+	pop2 = st.data[len(st.data)-3]
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-5]
+	return
+}
+
+func (st *Stack) pop6Peek() (pop0, pop1, pop2, pop3, pop4, pop5 uint256.Int, peek *uint256.Int) {
+	peek = &st.data[len(st.data)-7]
+	pop5 = st.data[len(st.data)-6]
+	pop4 = st.data[len(st.data)-5]
+	pop3 = st.data[len(st.data)-4]
+	pop2 = st.data[len(st.data)-3]
+	pop1 = st.data[len(st.data)-2]
+	pop0 = st.data[len(st.data)-1]
+	st.data = st.data[:len(st.data)-6]
+	return
+}
+
 func (st *Stack) len() int {
 	return len(st.data)
 }

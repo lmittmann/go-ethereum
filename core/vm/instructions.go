@@ -28,55 +28,55 @@ import (
 )
 
 func opAdd(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Add(&x, y)
 	return nil, nil
 }
 
 func opSub(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Sub(&x, y)
 	return nil, nil
 }
 
 func opMul(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Mul(&x, y)
 	return nil, nil
 }
 
 func opDiv(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Div(&x, y)
 	return nil, nil
 }
 
 func opSdiv(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.SDiv(&x, y)
 	return nil, nil
 }
 
 func opMod(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Mod(&x, y)
 	return nil, nil
 }
 
 func opSmod(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.SMod(&x, y)
 	return nil, nil
 }
 
 func opExp(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	base, exponent := scope.Stack.pop(), scope.Stack.peek()
+	base, exponent := scope.Stack.popPeek()
 	exponent.Exp(&base, exponent)
 	return nil, nil
 }
 
 func opSignExtend(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	back, num := scope.Stack.pop(), scope.Stack.peek()
+	back, num := scope.Stack.popPeek()
 	num.ExtendSign(num, &back)
 	return nil, nil
 }
@@ -88,7 +88,7 @@ func opNot(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
 }
 
 func opLt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	if x.Lt(y) {
 		y.SetOne()
 	} else {
@@ -98,7 +98,7 @@ func opLt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte,
 }
 
 func opGt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	if x.Gt(y) {
 		y.SetOne()
 	} else {
@@ -108,7 +108,7 @@ func opGt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte,
 }
 
 func opSlt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	if x.Slt(y) {
 		y.SetOne()
 	} else {
@@ -118,7 +118,7 @@ func opSlt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
 }
 
 func opSgt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	if x.Sgt(y) {
 		y.SetOne()
 	} else {
@@ -128,7 +128,7 @@ func opSgt(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
 }
 
 func opEq(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	if x.Eq(y) {
 		y.SetOne()
 	} else {
@@ -148,37 +148,37 @@ func opIszero(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]b
 }
 
 func opAnd(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.And(&x, y)
 	return nil, nil
 }
 
 func opOr(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Or(&x, y)
 	return nil, nil
 }
 
 func opXor(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y := scope.Stack.pop(), scope.Stack.peek()
+	x, y := scope.Stack.popPeek()
 	y.Xor(&x, y)
 	return nil, nil
 }
 
 func opByte(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	th, val := scope.Stack.pop(), scope.Stack.peek()
+	th, val := scope.Stack.popPeek()
 	val.Byte(&th)
 	return nil, nil
 }
 
 func opAddmod(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y, z := scope.Stack.pop(), scope.Stack.pop(), scope.Stack.peek()
+	x, y, z := scope.Stack.pop2Peek()
 	z.AddMod(&x, &y, z)
 	return nil, nil
 }
 
 func opMulmod(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	x, y, z := scope.Stack.pop(), scope.Stack.pop(), scope.Stack.peek()
+	x, y, z := scope.Stack.pop2Peek()
 	z.MulMod(&x, &y, z)
 	return nil, nil
 }
@@ -188,7 +188,7 @@ func opMulmod(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]b
 // and pushes on the stack arg2 shifted to the left by arg1 number of bits.
 func opSHL(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
 	// Note, second operand is left in the stack; accumulate result into it, and no need to push it afterwards
-	shift, value := scope.Stack.pop(), scope.Stack.peek()
+	shift, value := scope.Stack.popPeek()
 	if shift.LtUint64(256) {
 		value.Lsh(value, uint(shift.Uint64()))
 	} else {
@@ -202,7 +202,7 @@ func opSHL(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
 // and pushes on the stack arg2 shifted to the right by arg1 number of bits with zero fill.
 func opSHR(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
 	// Note, second operand is left in the stack; accumulate result into it, and no need to push it afterwards
-	shift, value := scope.Stack.pop(), scope.Stack.peek()
+	shift, value := scope.Stack.popPeek()
 	if shift.LtUint64(256) {
 		value.Rsh(value, uint(shift.Uint64()))
 	} else {
@@ -215,7 +215,7 @@ func opSHR(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
 // The SAR instruction (arithmetic shift right) pops 2 values from the stack, first arg1 and then arg2,
 // and pushes on the stack arg2 shifted to the right by arg1 number of bits with sign extension.
 func opSAR(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	shift, value := scope.Stack.pop(), scope.Stack.peek()
+	shift, value := scope.Stack.popPeek()
 	if shift.GtUint64(256) {
 		if value.Sign() >= 0 {
 			value.Clear()
@@ -231,7 +231,7 @@ func opSAR(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte
 }
 
 func opKeccak256(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	offset, size := scope.Stack.pop(), scope.Stack.peek()
+	offset, size := scope.Stack.popPeek()
 	data := scope.Memory.GetPtr(offset.Uint64(), size.Uint64())
 
 	if interpreter.hasher == nil {
@@ -294,11 +294,7 @@ func opCallDataSize(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext
 }
 
 func opCallDataCopy(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	var (
-		memOffset  = scope.Stack.pop()
-		dataOffset = scope.Stack.pop()
-		length     = scope.Stack.pop()
-	)
+	memOffset, dataOffset, length := scope.Stack.pop3()
 	dataOffset64, overflow := dataOffset.Uint64WithOverflow()
 	if overflow {
 		dataOffset64 = math.MaxUint64
@@ -307,7 +303,6 @@ func opCallDataCopy(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext
 	memOffset64 := memOffset.Uint64()
 	length64 := length.Uint64()
 	scope.Memory.Set(memOffset64, length64, getData(scope.Contract.Input, dataOffset64, length64))
-
 	return nil, nil
 }
 
@@ -317,12 +312,7 @@ func opReturnDataSize(pc *uint64, interpreter *EVMInterpreter, scope *ScopeConte
 }
 
 func opReturnDataCopy(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	var (
-		memOffset  = scope.Stack.pop()
-		dataOffset = scope.Stack.pop()
-		length     = scope.Stack.pop()
-	)
-
+	memOffset, dataOffset, length := scope.Stack.pop3()
 	offset64, overflow := dataOffset.Uint64WithOverflow()
 	if overflow {
 		return nil, ErrReturnDataOutOfBounds
@@ -354,11 +344,7 @@ func opCodeSize(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([
 }
 
 func opCodeCopy(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	var (
-		memOffset  = scope.Stack.pop()
-		codeOffset = scope.Stack.pop()
-		length     = scope.Stack.pop()
-	)
+	memOffset, codeOffset, length := scope.Stack.pop3()
 	uint64CodeOffset, overflow := codeOffset.Uint64WithOverflow()
 	if overflow {
 		uint64CodeOffset = math.MaxUint64
@@ -370,13 +356,7 @@ func opCodeCopy(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([
 }
 
 func opExtCodeCopy(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	var (
-		stack      = scope.Stack
-		a          = stack.pop()
-		memOffset  = stack.pop()
-		codeOffset = stack.pop()
-		length     = stack.pop()
-	)
+	a, memOffset, codeOffset, length := scope.Stack.pop4()
 	uint64CodeOffset, overflow := codeOffset.Uint64WithOverflow()
 	if overflow {
 		uint64CodeOffset = math.MaxUint64
@@ -509,13 +489,13 @@ func opMload(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]by
 
 func opMstore(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
 	// pop value of the stack
-	mStart, val := scope.Stack.pop(), scope.Stack.pop()
+	mStart, val := scope.Stack.pop2()
 	scope.Memory.Set32(mStart.Uint64(), &val)
 	return nil, nil
 }
 
 func opMstore8(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	off, val := scope.Stack.pop(), scope.Stack.pop()
+	off, val := scope.Stack.pop2()
 	scope.Memory.store[off.Uint64()] = byte(val.Uint64())
 	return nil, nil
 }
@@ -532,8 +512,7 @@ func opSstore(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]b
 	if interpreter.readOnly {
 		return nil, ErrWriteProtection
 	}
-	loc := scope.Stack.pop()
-	val := scope.Stack.pop()
+	loc, val := scope.Stack.pop2()
 	interpreter.evm.StateDB.SetState(scope.Contract.Address(), loc.Bytes32(), val.Bytes32())
 	return nil, nil
 }
@@ -554,7 +533,7 @@ func opJumpi(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]by
 	if interpreter.evm.abort.Load() {
 		return nil, errStopToken
 	}
-	pos, cond := scope.Stack.pop(), scope.Stack.pop()
+	pos, cond := scope.Stack.pop2()
 	if !cond.IsZero() {
 		if !scope.Contract.validJumpdest(&pos) {
 			return nil, ErrInvalidJump
@@ -668,10 +647,9 @@ func opCreate(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]b
 		return nil, ErrWriteProtection
 	}
 	var (
-		value        = scope.Stack.pop()
-		offset, size = scope.Stack.pop(), scope.Stack.pop()
-		input        = scope.Memory.GetCopy(offset.Uint64(), size.Uint64())
-		gas          = scope.Contract.Gas
+		value, offset, size = scope.Stack.pop3()
+		input               = scope.Memory.GetCopy(offset.Uint64(), size.Uint64())
+		gas                 = scope.Contract.Gas
 	)
 	if interpreter.evm.chainRules.IsEIP150 {
 		gas -= gas / 64
@@ -711,11 +689,10 @@ func opCreate2(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]
 		return nil, ErrWriteProtection
 	}
 	var (
-		endowment    = scope.Stack.pop()
-		offset, size = scope.Stack.pop(), scope.Stack.pop()
-		salt         = scope.Stack.pop()
-		input        = scope.Memory.GetCopy(offset.Uint64(), size.Uint64())
-		gas          = scope.Contract.Gas
+		endowment, offset, size, salt = scope.Stack.pop3Peek()
+		addrSlot                      = salt
+		input                         = scope.Memory.GetCopy(offset.Uint64(), size.Uint64())
+		gas                           = scope.Contract.Gas
 	)
 
 	// Apply EIP150
@@ -723,15 +700,14 @@ func opCreate2(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]
 	scope.Contract.UseGas(gas, interpreter.evm.Config.Tracer, tracing.GasChangeCallContractCreation2)
 	// reuse size int for stackvalue
 	stackvalue := size
-	res, addr, returnGas, suberr := interpreter.evm.Create2(scope.Contract, input, gas,
-		&endowment, &salt)
+	res, addr, returnGas, suberr := interpreter.evm.Create2(scope.Contract, input, gas, &endowment, salt)
 	// Push item on the stack based on the returned error.
 	if suberr != nil {
 		stackvalue.Clear()
 	} else {
 		stackvalue.SetBytes(addr.Bytes())
 	}
-	scope.Stack.push(&stackvalue)
+	addrSlot.SetBytes(addr.Bytes())
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
 
 	if suberr == ErrExecutionReverted {
@@ -743,13 +719,13 @@ func opCreate2(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]
 }
 
 func opCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	stack := scope.Stack
-	// Pop gas. The actual gas in interpreter.evm.callGasTemp.
-	// We can use this as a temporary value
-	temp := stack.pop()
-	gas := interpreter.evm.callGasTemp
-	// Pop other call parameters.
-	addr, value, inOffset, inSize, retOffset, retSize := stack.pop(), stack.pop(), stack.pop(), stack.pop(), stack.pop(), stack.pop()
+	var (
+		// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
+		_, addr, value, inOffset, inSize, retOffset, retSize = scope.Stack.pop6Peek()
+		gas                                                  = interpreter.evm.callGasTemp
+		successSlot                                          = retSize
+		retSizeUint64                                        = retSize.Uint64()
+	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get the arguments from the memory.
 	args := scope.Memory.GetPtr(inOffset.Uint64(), inSize.Uint64())
@@ -760,16 +736,15 @@ func opCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byt
 	if !value.IsZero() {
 		gas += params.CallStipend
 	}
-	ret, returnGas, err := interpreter.evm.Call(scope.Contract, toAddr, args, gas, &value)
 
+	ret, returnGas, err := interpreter.evm.Call(scope.Contract, toAddr, args, gas, &value)
 	if err != nil {
-		temp.Clear()
+		successSlot.Clear()
 	} else {
-		temp.SetOne()
+		successSlot.SetOne()
 	}
-	stack.push(&temp)
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSize.Uint64(), ret)
+		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -779,13 +754,13 @@ func opCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byt
 }
 
 func opCallCode(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
-	stack := scope.Stack
-	// We use it as a temporary value
-	temp := stack.pop()
-	gas := interpreter.evm.callGasTemp
-	// Pop other call parameters.
-	addr, value, inOffset, inSize, retOffset, retSize := stack.pop(), stack.pop(), stack.pop(), stack.pop(), stack.pop(), stack.pop()
+	var (
+		// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
+		_, addr, value, inOffset, inSize, retOffset, retSize = scope.Stack.pop6Peek()
+		gas                                                  = interpreter.evm.callGasTemp
+		successSlot                                          = retSize
+		retSizeUint64                                        = retSize.Uint64()
+	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get arguments from the memory.
 	args := scope.Memory.GetPtr(inOffset.Uint64(), inSize.Uint64())
@@ -796,13 +771,12 @@ func opCallCode(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([
 
 	ret, returnGas, err := interpreter.evm.CallCode(scope.Contract, toAddr, args, gas, &value)
 	if err != nil {
-		temp.Clear()
+		successSlot.Clear()
 	} else {
-		temp.SetOne()
+		successSlot.SetOne()
 	}
-	stack.push(&temp)
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSize.Uint64(), ret)
+		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -812,26 +786,25 @@ func opCallCode(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([
 }
 
 func opDelegateCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	stack := scope.Stack
-	// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
-	// We use it as a temporary value
-	temp := stack.pop()
-	gas := interpreter.evm.callGasTemp
-	// Pop other call parameters.
-	addr, inOffset, inSize, retOffset, retSize := stack.pop(), stack.pop(), stack.pop(), stack.pop(), stack.pop()
+	var (
+		// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
+		_, addr, inOffset, inSize, retOffset, retSize = scope.Stack.pop5Peek()
+		gas                                           = interpreter.evm.callGasTemp
+		successSlot                                   = retSize
+		retSizeUint64                                 = retSize.Uint64()
+	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get arguments from the memory.
 	args := scope.Memory.GetPtr(inOffset.Uint64(), inSize.Uint64())
 
 	ret, returnGas, err := interpreter.evm.DelegateCall(scope.Contract, toAddr, args, gas)
 	if err != nil {
-		temp.Clear()
+		successSlot.Clear()
 	} else {
-		temp.SetOne()
+		successSlot.SetOne()
 	}
-	stack.push(&temp)
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSize.Uint64(), ret)
+		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -841,26 +814,25 @@ func opDelegateCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext
 }
 
 func opStaticCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
-	stack := scope.Stack
-	// We use it as a temporary value
-	temp := stack.pop()
-	gas := interpreter.evm.callGasTemp
-	// Pop other call parameters.
-	addr, inOffset, inSize, retOffset, retSize := stack.pop(), stack.pop(), stack.pop(), stack.pop(), stack.pop()
+	var (
+		// Pop gas. The actual gas is in interpreter.evm.callGasTemp.
+		_, addr, inOffset, inSize, retOffset, retSize = scope.Stack.pop5Peek()
+		gas                                           = interpreter.evm.callGasTemp
+		successSlot                                   = retSize
+		retSizeUint64                                 = retSize.Uint64()
+	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get arguments from the memory.
 	args := scope.Memory.GetPtr(inOffset.Uint64(), inSize.Uint64())
 
 	ret, returnGas, err := interpreter.evm.StaticCall(scope.Contract, toAddr, args, gas)
 	if err != nil {
-		temp.Clear()
+		successSlot.Clear()
 	} else {
-		temp.SetOne()
+		successSlot.SetOne()
 	}
-	stack.push(&temp)
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSize.Uint64(), ret)
+		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -870,14 +842,14 @@ func opStaticCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) 
 }
 
 func opReturn(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	offset, size := scope.Stack.pop(), scope.Stack.pop()
+	offset, size := scope.Stack.pop2()
 	ret := scope.Memory.GetPtr(offset.Uint64(), size.Uint64())
 
 	return ret, errStopToken
 }
 
 func opRevert(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
-	offset, size := scope.Stack.pop(), scope.Stack.pop()
+	offset, size := scope.Stack.pop2()
 	ret := scope.Memory.GetPtr(offset.Uint64(), size.Uint64())
 
 	interpreter.returnData = ret
@@ -941,7 +913,7 @@ func makeLog(size int) executionFunc {
 		}
 		topics := make([]common.Hash, size)
 		stack := scope.Stack
-		mStart, mSize := stack.pop(), stack.pop()
+		mStart, mSize := stack.pop2()
 		for i := 0; i < size; i++ {
 			addr := stack.pop()
 			topics[i] = addr.Bytes32()
