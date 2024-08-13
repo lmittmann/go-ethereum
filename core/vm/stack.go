@@ -135,54 +135,22 @@ func (st *Stack) len() int {
 	return len(st.data)
 }
 
-func (st *Stack) swap1() {
-	st.data[st.len()-2], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-2]
-}
-func (st *Stack) swap2() {
-	st.data[st.len()-3], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-3]
-}
-func (st *Stack) swap3() {
-	st.data[st.len()-4], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-4]
-}
-func (st *Stack) swap4() {
-	st.data[st.len()-5], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-5]
-}
-func (st *Stack) swap5() {
-	st.data[st.len()-6], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-6]
-}
-func (st *Stack) swap6() {
-	st.data[st.len()-7], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-7]
-}
-func (st *Stack) swap7() {
-	st.data[st.len()-8], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-8]
-}
-func (st *Stack) swap8() {
-	st.data[st.len()-9], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-9]
-}
-func (st *Stack) swap9() {
-	st.data[st.len()-10], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-10]
-}
-func (st *Stack) swap10() {
-	st.data[st.len()-11], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-11]
-}
-func (st *Stack) swap11() {
-	st.data[st.len()-12], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-12]
-}
-func (st *Stack) swap12() {
-	st.data[st.len()-13], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-13]
-}
-func (st *Stack) swap13() {
-	st.data[st.len()-14], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-14]
-}
-func (st *Stack) swap14() {
-	st.data[st.len()-15], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-15]
-}
-func (st *Stack) swap15() {
-	st.data[st.len()-16], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-16]
-}
-func (st *Stack) swap16() {
-	st.data[st.len()-17], st.data[st.len()-1] = st.data[st.len()-1], st.data[st.len()-17]
-}
+func (st *Stack) swap1()  { tmp := st.data[st.len()-2:]; tmp[0], tmp[1] = tmp[1], tmp[0] }
+func (st *Stack) swap2()  { tmp := st.data[st.len()-3:]; tmp[0], tmp[2] = tmp[2], tmp[0] }
+func (st *Stack) swap3()  { tmp := st.data[st.len()-4:]; tmp[0], tmp[3] = tmp[3], tmp[0] }
+func (st *Stack) swap4()  { tmp := st.data[st.len()-5:]; tmp[0], tmp[4] = tmp[4], tmp[0] }
+func (st *Stack) swap5()  { tmp := st.data[st.len()-6:]; tmp[0], tmp[5] = tmp[5], tmp[0] }
+func (st *Stack) swap6()  { tmp := st.data[st.len()-7:]; tmp[0], tmp[6] = tmp[6], tmp[0] }
+func (st *Stack) swap7()  { tmp := st.data[st.len()-8:]; tmp[0], tmp[7] = tmp[7], tmp[0] }
+func (st *Stack) swap8()  { tmp := st.data[st.len()-9:]; tmp[0], tmp[8] = tmp[8], tmp[0] }
+func (st *Stack) swap9()  { tmp := st.data[st.len()-10:]; tmp[0], tmp[9] = tmp[9], tmp[0] }
+func (st *Stack) swap10() { tmp := st.data[st.len()-11:]; tmp[0], tmp[10] = tmp[10], tmp[0] }
+func (st *Stack) swap11() { tmp := st.data[st.len()-12:]; tmp[0], tmp[11] = tmp[11], tmp[0] }
+func (st *Stack) swap12() { tmp := st.data[st.len()-13:]; tmp[0], tmp[12] = tmp[12], tmp[0] }
+func (st *Stack) swap13() { tmp := st.data[st.len()-14:]; tmp[0], tmp[13] = tmp[13], tmp[0] }
+func (st *Stack) swap14() { tmp := st.data[st.len()-15:]; tmp[0], tmp[14] = tmp[14], tmp[0] }
+func (st *Stack) swap15() { tmp := st.data[st.len()-16:]; tmp[0], tmp[15] = tmp[15], tmp[0] }
+func (st *Stack) swap16() { tmp := st.data[st.len()-17:]; tmp[0], tmp[16] = tmp[16], tmp[0] }
 
 func (st *Stack) dup(n int) {
 	st.push(&st.data[st.len()-n])
