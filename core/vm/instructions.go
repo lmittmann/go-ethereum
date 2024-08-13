@@ -724,7 +724,7 @@ func opCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byt
 		_, addr, value, inOffset, inSize, retOffset, retSize = scope.Stack.pop6Peek()
 		gas                                                  = interpreter.evm.callGasTemp
 		successSlot                                          = retSize
-		retSizeUint64                                        = retSize.Uint64()
+		retSize64                                            = retSize.Uint64()
 	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get the arguments from the memory.
@@ -744,7 +744,7 @@ func opCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byt
 		successSlot.SetOne()
 	}
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
+		scope.Memory.Set(retOffset.Uint64(), retSize64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -759,7 +759,7 @@ func opCallCode(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([
 		_, addr, value, inOffset, inSize, retOffset, retSize = scope.Stack.pop6Peek()
 		gas                                                  = interpreter.evm.callGasTemp
 		successSlot                                          = retSize
-		retSizeUint64                                        = retSize.Uint64()
+		retSize64                                            = retSize.Uint64()
 	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get arguments from the memory.
@@ -776,7 +776,7 @@ func opCallCode(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([
 		successSlot.SetOne()
 	}
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
+		scope.Memory.Set(retOffset.Uint64(), retSize64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -791,7 +791,7 @@ func opDelegateCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext
 		_, addr, inOffset, inSize, retOffset, retSize = scope.Stack.pop5Peek()
 		gas                                           = interpreter.evm.callGasTemp
 		successSlot                                   = retSize
-		retSizeUint64                                 = retSize.Uint64()
+		retSize64                                     = retSize.Uint64()
 	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get arguments from the memory.
@@ -804,7 +804,7 @@ func opDelegateCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext
 		successSlot.SetOne()
 	}
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
+		scope.Memory.Set(retOffset.Uint64(), retSize64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
@@ -819,7 +819,7 @@ func opStaticCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) 
 		_, addr, inOffset, inSize, retOffset, retSize = scope.Stack.pop5Peek()
 		gas                                           = interpreter.evm.callGasTemp
 		successSlot                                   = retSize
-		retSizeUint64                                 = retSize.Uint64()
+		retSize64                                     = retSize.Uint64()
 	)
 	toAddr := common.Address(addr.Bytes20())
 	// Get arguments from the memory.
@@ -832,7 +832,7 @@ func opStaticCall(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) 
 		successSlot.SetOne()
 	}
 	if err == nil || err == ErrExecutionReverted {
-		scope.Memory.Set(retOffset.Uint64(), retSizeUint64, ret)
+		scope.Memory.Set(retOffset.Uint64(), retSize64, ret)
 	}
 
 	scope.Contract.RefundGas(returnGas, interpreter.evm.Config.Tracer, tracing.GasChangeCallLeftOverRefunded)
